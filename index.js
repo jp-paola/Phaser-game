@@ -6,7 +6,7 @@ const config={
     type:Phaser.AUTO,
     width: 800,
     height: 600,
-    backgroundColor: '#000000',
+    backgroundColor: '#a5d2e4',
     scene:[Game],
     physics:{
         default: 'arcade',
