@@ -19,6 +19,11 @@ export class Game extends Phaser.Scene {
 
         });
 
+        this.load.spritesheet('jump', 'assets/dragon/jump_verde.png',{
+            frameWidth: 32,
+            frameHeight:32
+        });
+
         this.load.image('p1', 'assets/tilemap/Plataforma1.png');
         this.load.image('p2', 'assets/tilemap/Plataforma2.png');
 
@@ -36,7 +41,7 @@ export class Game extends Phaser.Scene {
         //creación del sprite PLAYER
         this.player = this.physics.add.sprite(100, 300, 'idle');
 
-        this.player.setBounce(0.2);//rebote
+        this.player.setBounce(0.4);//rebote
         this.player.setCollideWorldBounds(true);
         this.player.setSize(24, 26);
         this.player.setOffset(4, 6);
@@ -118,7 +123,7 @@ export class Game extends Phaser.Scene {
         this.anims.create({
             key: 'idle',
             frames: this.anims.generateFrameNumbers('idle', { start: 0, end: 3 }),
-            frameRate: 8,
+            frameRate: 5,
             repeat: -1
 
 
@@ -132,6 +137,19 @@ export class Game extends Phaser.Scene {
             repeat: -1
         });
 
+
+
+        
+
+
+        this.anims.create({
+            key:'jump',
+            frames: this.anims.generateFrameNumbers('jump', {start:0, end:3}),
+            frameRate: 10,
+            repeat:0
+
+
+        });
 
 
         this.player.play('idle');
@@ -153,31 +171,39 @@ export class Game extends Phaser.Scene {
         this.player.setVelocityX(0);
         //this.player.x +=5;
 
-
+        //izquierda
         if (this.cursors.left.isDown) {
             this.player.setVelocityX(-speed);
 
             this.player.setFlipX(true);
-            this.player.anims.play('walk', true);
+            this.player.anims.play('walk',true);
 
 
 
-
+        //derecha
         }
         else if (this.cursors.right.isDown) {
             this.player.setVelocityX(speed);
 
             this.player.setFlipX(false);
-            this.player.anims.play('walk', true);
+            this.player.anims.play('walk',true);
 
 
         }
 
+        else if (this.cursors.up.isDown && this.player.body.touching.down){
+            this.player.setVelocityY(-300);
+            this.player.anims.play('jump', true);
+        }
+
+
+        //estatico
         else {
             this.player.anims.play('idle', true);
 
 
         }
+
 
 
     }
