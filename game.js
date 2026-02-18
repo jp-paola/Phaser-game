@@ -7,7 +7,7 @@ export class Game extends Phaser.Scene {
 
         //live-server
 
-        //this.load.image('background', 'assets/background.png');
+        this.load.image('background', 'assets/background.png');
         this.load.spritesheet('idle', 'assets/dragon/idle_verde.png', {
             frameWidth: 32,
             frameHeight: 32
@@ -36,7 +36,7 @@ export class Game extends Phaser.Scene {
 
     create() {
 
-        //this.add.image(400, 300, 'background');
+        this.add.image(400, 300, 'background');
 
         //creación del sprite PLAYER
         this.player = this.physics.add.sprite(100, 300, 'idle');
@@ -47,12 +47,26 @@ export class Game extends Phaser.Scene {
         this.player.setOffset(4, 6);
 
 
+        //Botones
+        this.botonMenu = this.add.text(650, 20, 'Menu',{
+            fontSize: '24px',
+            fill:"#ffff",
+            backgroundColor: '#000000'
+        });
+
+        this.botonMenu.setInteractive();
+
+        this.botonMenu.on('pointerdown', () =>{
+            this.scene.start('menu');
+        });
+
+
         //PLATAFORMAS 
 
         this.plataforms = this.physics.add.staticGroup();
 
-        this.plataforms.create(200, 585, 'p2');
-        this.plataforms.create(600, 585, 'p2');
+        this.plataforms.create(200, 590, 'p2');
+        //this.plataforms.create(600, 590, 'p2');
 
 
         //Creacion de grupo de monedas
@@ -82,16 +96,9 @@ export class Game extends Phaser.Scene {
         //Score
 
         this.score = 0;
+        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '25px', fill: '#ffffff' });
 
-        this.scoreText = this.add.text(
-            16,
-            16,
-            'Puntos: 0',
-            {
-                //fontSize: '40 px',
-                fill: '#ffffff'
-            }
-        );
+   
 
 
 
