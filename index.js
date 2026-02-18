@@ -1,4 +1,6 @@
 import {Game} from './game.js';
+import { MenuScene } from './MenuScene.js';
+
 
 
 
@@ -7,7 +9,7 @@ const config={
     width: 800,
     height: 600,
     backgroundColor: '#a5d2e4',
-    scene:[Game],
+    scene:[Game, MenuScene],
     physics:{
         default: 'arcade',
         arcade:{
