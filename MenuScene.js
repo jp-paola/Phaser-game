@@ -4,33 +4,26 @@ export class MenuScene extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('backgroundM', 'assets/MenuS.png');
+        this.load.image('buttonPlay', 'assets/PLAY.png');
 
     }
 
     create() {
-        this.add.text(250, 200, 'MI NUEVO JUEGO', {
-            fontSize: '40px',
-            fill: '#ffffff'
-        });
 
-
-
+        this.add.image(400, 300, 'backgroundM');
+        
         //Boton de Jugar
 
-        const boton = this.add.text(300, 320, 'PLAY', {
-            fontSize: '32px',
-            fill: '#ffff',
-            backgroundColor: '#000000'
+        this.buttonPlay = this.add.image(400,350, 'buttonPlay');
 
-        });
-        boton.setInteractive();
+        this.buttonPlay.setInteractive({useHandCursor: true});
 
-        boton.on('pointerdown', () => {
+        this.buttonPlay.on ('pointerdown', ()=>{
             this.scene.start('game');
+        });
 
 
-
-        })
 
 
 
