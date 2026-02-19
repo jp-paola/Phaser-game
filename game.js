@@ -71,13 +71,25 @@ export class Game extends Phaser.Scene {
         this.player.setOffset(4, 6);
 
         //enemigo
-        this.villan = this.physics.add.sprite(600, 300, 'walkVillan');
+        this.villan = this.physics.add.sprite(600, 500, 'walkVillan');
 
         this.villan.setCollideWorldBounds(true);
         this.villan.setSize(24, 26);
         this.villan.setOffset(4, 6);
-        this.villan.setBounce(0.2);
-        this.villan.setVelocityX(150);
+
+        this.villan.body.setGravityY(500);
+
+
+
+
+        //zonaInvisible
+
+        this.zonaLeft = this.villan.x - 80;
+        this.zonaRigth = this.villan.x + 80;
+
+
+        this.speedVillan = 100;
+        this.villan.setVelocityX(this.speedVillan);
 
 
         //Botones
@@ -290,6 +302,28 @@ export class Game extends Phaser.Scene {
         else {
             this.player.anims.play('idle', true);
         }
+
+
+        //Villano Movimientos
+
+        if (this.villan.x >= this.zonaRigth) {
+
+            this.villan.setVelocityX(-this.speedVillan);
+
+
+            this.villan.setFlipX(true);
+        }
+        else if (this.villan.x <= this.zonaLeft) {
+
+
+            this.villan.setVelocityX(this.speedVillan);
+
+
+            this.villan.setFlipX(false);
+        }
+
+
+
     }
 
 
@@ -313,8 +347,8 @@ export class Game extends Phaser.Scene {
 
     //metodo de jugador toca a enemigo
 
-    hitEnemy(player, villan){
-        this.scene.restart();
+    hitEnemy(player, villan) {
+        this.scene.start('gameOver');
     }
 
 
